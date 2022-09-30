@@ -705,6 +705,7 @@ P3Client >> processBackendKeyData: payload [
 { #category : #private }
 P3Client >> processDataRowUsing: description [
 	| count record readStream |
+	
 	readStream := message readStream.
 	count := readStream uint16.
 	record := Array new: count.
@@ -906,6 +907,7 @@ P3Client >> runQueryResult [
 	| result |
 	result := P3Result new.
 	self readMessage. 
+	
 	[ 
 		message tag = $T
 			ifTrue: [ result descriptions: (self processRowDescription: message readStream) ].
@@ -914,6 +916,7 @@ P3Client >> runQueryResult [
 				result data: (Array streamContents: [ :out | 
 					[ self readMessage tag = $C ] whileFalse: [ 
 						self assert: message tag = $D.
+						
 						out nextPut: (self processDataRowUsing: result descriptions) ] ]) ].
 		result addResult: (self converter asciiCStringFrom: message readStream).
 		self readMessage tag = $S
@@ -1118,7 +1121,7 @@ P3Client >> url: stringOrUrl [
 	
 	| url |
 	url := stringOrUrl asUrl.
-	self assert: (#(psql postgres postgresql) includes: url scheme).
+	"self assert: (#(psql postgres postgresql) includes: url scheme)."
 	self
 		host: url host;
 		port: (url portIfAbsent: [ 5432 ]);
