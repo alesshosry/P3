@@ -39,6 +39,7 @@ P3Converter class >> typeMap [
 			23 #(int4 #convertIntegerFrom:length:description:) 
 			25 #(text #convertStringFrom:length:description:) 
 			26 #(oid #convertIntegerFrom:length:description:) 
+			194 #(text #convertStringFrom:length:description:) 
 			700 #(float4 #convertFloatFrom:length:description:) 
 			701 #(float8 #convertFloatFrom:length:description:) 
 			1042 #(bpchar #convertStringFrom:length:description:) 
@@ -60,6 +61,7 @@ P3Converter class >> typeMap [
 			3802 #(jsonb #convertJsonFrom:length:description:)
 			"arrays"
 			1000 #(#'_bool' #convertBooleanArrayFrom:length:description:)
+			1005 #(#'_int2' #convertIntegerArrayFrom:length:description:)
 			1007 #(#'_int4' #convertIntegerArrayFrom:length:description:)
 			1009 #(#'_text' #convertStringArrayFrom:length:description:)
 			1015 #(#'_varchar' #convertStringArrayFrom:length:description:)
